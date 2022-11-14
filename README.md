@@ -1,2 +1,3 @@
 # VRNetzer_backend_extension_sample
-Example Repository of an VRNetzer backend extension
+
+This small repository can be used as a basis for building your own extension for the VRNetzer backend.
