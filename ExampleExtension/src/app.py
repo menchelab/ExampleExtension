@@ -3,6 +3,7 @@ import os
 import random
 
 import flask
+import util
 
 import GlobalData as GD
 import uploader
@@ -12,17 +13,16 @@ url_prefix = "/example"  # MANDATORY
 extensions_name = "ExampleExtension"
 
 # Define where all templates and static files of your extension are located
-
 templates = os.path.abspath("./extensions/ExampleExtension/templates")
 static = os.path.abspath("./extensions/ExampleExtension/static")
-print("test")
+
 # Create a blueprint for the extension this will be loaded by the main app
 blueprint = flask.Blueprint(
     extensions_name,
     __name__,
     url_prefix=url_prefix,
-    template_folder=templates,
-    static_folder=static,
+    template_folder=templates, # defaults to static of main app.py
+    static_folder=static, # defaults to static of main app.py
 )  # MANDATORY
 
 # Define your first route
@@ -35,12 +35,7 @@ def hello():
 @blueprint.route("/main", methods=["GET"])
 def example_main():
     """Route to extended Main panel"""
-    username = flask.request.args.get("usr")
-    if username is None:
-        username = str(random.randint(1001, 9998))
-    else:
-        username = username + str(random.randint(1001, 9998))
-        print(username)
+    username = util.generate_username()
     project = flask.request.args.get("project")
 
     if project is None or project == "none":
