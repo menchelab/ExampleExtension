@@ -69,7 +69,7 @@ Subsequently, you can add your forked ExampleExtension as a submodule to your VR
 
     cd extensions
 
-    git submodule add https://github.com/menchelab/ExampleExtension.git
+    git submodule add https://github.com/<YourGitUsername>/ExampleExtension.git
 
 In this manner, you can easily change your extension while keeping it contained in the testing environment of the VRNetzer backend. Whenever you change something in your extension, you can easily commit your changes to your forked ExampleExtension repository.
 
