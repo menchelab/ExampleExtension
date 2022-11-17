@@ -1,4 +1,4 @@
-# VRNetzer_backend_extension_sample
+# VRNetzer backend example extension
 
 This series teaches you the basic skills you need for developing an extension for the VRNetzer backend module.
 
@@ -102,7 +102,7 @@ If you see a yellow warning message similar to this:
 
 <br>
 
-something seems to be wrong with your extension and it will not be loaded by the flask server. you can check [here](#troubleshooting) for possible solutions.
+something seems to be wrong with your extension and it will not be loaded by the flask server. You can check [here](#troubleshooting) for possible solutions.
 
 ## Deployment
 
