@@ -104,11 +104,94 @@ If you see a yellow warning message similar to this:
 
 something seems to be wrong with your extension and it will not be loaded by the flask server. You can check [here](#troubleshooting) for possible solutions.
 
+### Mandatory components of an extension
+
+The ExampleExtension repository gives you a basic idea of what is needed so that your extension can be loaded by the VRNetzer backend. In the following, we will give you a more detailed overview of the components of an extension.
+
+**1. `app.py` file in an `src` directory**
+
+The app.py file is the entry point of your extension. It has to be included in a directory called "src" in the home directory of your Extension. The app.py file has to contain the following attributes:
+
+- A string called `url_prefix`.
+
+  - This string defines the prefix each flask route of your extension will have. For example, if you set the url_prefix to 'example', the route '/test' will be accessible via 'http://localhost:5000/example/test'.
+
+- A flask blueprint called `blueprint`.
+
+  - this attribute is defined by the following line of code:
+
+  ```
+  blueprint = flask.Blueprint(
+      extensions_name,
+      __name__,
+      url_prefix=url_prefix)
+  ```
+
+  The blueprint will be registered by the main VRNetzer backend `app.py` and is used to define the routes your extension adds. For further information on flask blueprints, you can check the [flask documentation](https://flask.palletsprojects.com/en/2.0.x/blueprints/).
+
+**2. Include templates and static files which are specific to your Extension**
+
+To make templates and static files contained in your extension accessible, it has to be defined, where they can be found. We suggest adding two directories named templates and static to your extension to be consistent with Flask's naming convention.
+During the initialization of the blueprint, the following lines of code guide the Flask server to the correct directories:
+
+```
+templates =  os.path.abspath("./extensions/<NameOfYourExtension>/templates")
+
+static = os.path.abspath("./extensions/<NameOfYourExtension>/static")
+
+blueprint = flask.Blueprint(
+    <NameOfYourExtension>,
+    __name__,
+    url_prefix=url_prefix,
+    template_folder=templates, # defaults to static of main app.py
+    static_folder=static, # defaults to static of main app.py
+)
+```
+
+To link to files in these directories in your HTML files, you should utilize flask's `url_for` function. For example, if you want to link to a file called `style.css` in your `"<NameOfYourExtension>/static/css"` directory, you can use the following line of code:
+
+```
+"{{ url_for('<NameOfYourExtension>.static', filename='css/style.cs') }}"
+```
+
+**3. Add functions to be executed before the first request**
+
+If some code needs to be executed before the first request, you can define a list of functions called `before_first_request` in your `app.py`. For example, have to dynamically build your templates, you can make use of this functionality.
+
+**4. Add tabs to the Main Panel and add a new Uploader**
+
+If you want to add a new tab to the VRNetzer Main Panel, you can utilize the `example_main_tab.html` template contained in the ExampleExtension. Each HTML that should be added as a tab to the main panel, has to be added to the `main_tabs`list in the `app.py` file. The flask server will automatically add the tabs to the main panel.
+The content of the tab needs to be contained in a `div` with the id `tab_to_add`:
+
+```
+<div id="tab_to_add" class="container" style="display:none;">
+    <div id="example_tab">
+      <!-- Your Content -->
+    </div>
+</div>
+```
+
+The flask server will search for a free tab on the main panel before the first request and add the content of you tab to the main panel. If you want to change the icon on the tab, you have to define an `image` tag with the id `tab_icon` in your tab template. The src of this image will contain the URL for the icon you want to use.
+
+```
+<img id="tab_img" src="{{ url_for('ExampleExtension.static', filename='img/example_icon.png') }}"
+style="display: none;" ;>
+```
+
+The flask server will change the icon accordingly. Furthermore, external links to stylesheets and scripts will automatically be added to the main HTML header. Every other code contained in the HTML tab will also be added to the main HTML file.
+
+All of this applies if you want to add a new tab to the uploader. You can utilize the `example_upload_tab.html` template contained in the ExampleExtension. HTML files to add have to be added to the `upload_tabs` list in the `app.py` file.
+
+**5. Present your new routes at VRNetzer's Home**
+
+TODO: ...
+
 ## Deployment
 
 <!-- </details> -->
 <details>
-    <summary><h1> Further Resources </h1></summary>
+  <summary><h1> Further Resources </h1></summary>
 </details>
 
 <h2 id="troubleshooting"> Troubleshooting </h2>
+...

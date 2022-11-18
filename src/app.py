@@ -3,13 +3,13 @@ import os
 import random
 
 import flask
-import util
 
 import GlobalData as GD
 import uploader
+import util
 
 # Prefix for the extension, as well as the names space of the extension
-url_prefix = "/example"  # MANDATORY
+url_prefix = "/ExampleExtension"  # MANDATORY
 extensions_name = "ExampleExtension"
 
 # Define where all templates and static files of your extension are located
@@ -21,9 +21,18 @@ blueprint = flask.Blueprint(
     extensions_name,
     __name__,
     url_prefix=url_prefix,
-    template_folder=templates, # defaults to static of main app.py
-    static_folder=static, # defaults to static of main app.py
+    template_folder=templates,  # defaults to static of main app.py
+    static_folder=static,  # defaults to static of main app.py
 )  # MANDATORY
+
+main_tabs = [
+    "example_main_tab.html"
+]  # List of tab templates to be loaded in the main panel
+upload_tabs = [
+    "example_upload_tab.html"
+]  # List of tab templates to be loaded in the upload panel
+
+before_first_request = []  # List of functions to be executed before the first request
 
 # Define your first route
 @blueprint.route("/hello", methods=["GET"])
@@ -34,33 +43,28 @@ def hello():
 # Adds a tab to the main panel route to this is /example/main
 @blueprint.route("/main", methods=["GET"])
 def example_main():
-    """Route to extended Main panel"""
-    username = util.generate_username()
-    project = flask.request.args.get("project")
+    return "Example Main Panel"
 
-    if project is None or project == "none":
-        project = uploader.listProjects()[0]
-    print(project)
-    if flask.request.method == "GET":
 
-        room = 1
-        # Store the data in session
-        flask.session["username"] = username
-        flask.session["room"] = room
-        folder = "static/projects/" + project + "/"
+@blueprint.route("/upload", methods=["GET"])
+def example_node_info():
+    return "Example Node Info Panel"
 
-        # Update global pfile and global names variables
-        with open(folder + "pfile.json", "r") as json_file:
-            GD.pfile = json.load(json_file)
 
-        with open(folder + "names.json", "r") as json_file:
-            GD.names = json.load(json_file)
+@blueprint.route("/upload", methods=["GET"])
+def example_upload():
+    return "Example Upload Panel"
 
-        return flask.render_template(
-            "example_main_tab.html",
-            session=flask.session,
-            sessionData=json.dumps(GD.sessionData),
-            pfile=json.dumps(GD.pfile),
-        )
+
+@blueprint.route("/preview", methods=["GET"])
+def example_preview():
+    return "Example Preview Panel"
+
+
+@blueprint.route("/uploadfiles", methods=["POST"])
+def example_upload_files():
+    success = False
+    if success:
+        return "<a style='color:green;'>Success</a>", 200
     else:
-        return "error"
+        return "<a style='color:red;'>Error</a>", 500
