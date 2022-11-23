@@ -46,7 +46,8 @@ The Core module builds the basis of the VRNetzer. It comes with a basic set of f
 visualize network data. We highly encourage you to extend the VRNetzer and share your results with the community. This way, you can help us to improve the VRNetzer and make it more useful for everyone.
 
 </details>
-<!-- <details> -->
+
+<details>
   <summary><h1> Start creating your first extension</h1></summary>
 
 ### Fork the VRNetzer backend repository
@@ -104,7 +105,7 @@ If you see a yellow warning message similar to this:
 
 something seems to be wrong with your extension and it will not be loaded by the flask server. You can check [here](#troubleshooting) for possible solutions.
 
-### Mandatory components of an extension
+### Components of an extension
 
 The ExampleExtension repository gives you a basic idea of what is needed so that your extension can be loaded by the VRNetzer backend. In the following, we will give you a more detailed overview of the components of an extension.
 
@@ -128,6 +129,8 @@ The app.py file is the entry point of your extension. It has to be included in a
   ```
 
   The blueprint will be registered by the main VRNetzer backend `app.py` and is used to define the routes your extension adds. For further information on flask blueprints, you can check the [flask documentation](https://flask.palletsprojects.com/en/2.0.x/blueprints/).
+
+---
 
 **2. Include templates and static files which are specific to your Extension**
 
@@ -154,9 +157,13 @@ To link to files in these directories in your HTML files, you should utilize fla
 "{{ url_for('<NameOfYourExtension>.static', filename='css/style.cs') }}"
 ```
 
+---
+
 **3. Add functions to be executed before the first request**
 
 If some code needs to be executed before the first request, you can define a list of functions called `before_first_request` in your `app.py`. For example, have to dynamically build your templates, you can make use of this functionality.
+
+---
 
 **4. Add tabs to the Main Panel and add a new Uploader**
 
@@ -182,16 +189,40 @@ The flask server will change the icon accordingly. Furthermore, external links t
 
 All of this applies if you want to add a new tab to the uploader. You can utilize the `example_upload_tab.html` template contained in the ExampleExtension. HTML files to add have to be added to the `upload_tabs` list in the `app.py` file.
 
-**5. Present your new routes at VRNetzer's Home**
+---
 
-TODO: ...
+<h4 id="home_present"><b>5. Present your new routes at VRNetzer's Home</h4>
+
+If you want your route to be presented in one of the categories shown on http://127.0.0.1:6000/home (Windows/Linux) / http://127.0.0.1:3000/home (MacOS), your route has to contain one of the following keywords:
+|Keyword|Category|Example|
+|:-|:-|:-|
+|`home`|Home|`@blueprint.route("/home")`|
+|`main`|Main (Panels)|`@blueprint.route("/main")`|
+|`nodepanel`|Node Info|`@blueprint.route("/nodepanel")`|
+|`upload` but not `upload` and `files`|Uploader|`@blueprint.route("/upload")`|
+|`preview`|Previews|`@blueprint.route("/preview")`|
+
+**6. Present your new routes on the navigation bar**
+
+The navigation bar is only shown outside of the VR. If you would like to have your route to be presented here, the same rules apply as for the home page [(see above)](#home_present).
 
 ## Deployment
 
-<!-- </details> -->
+## TODO: Describe the deployment process on a platform where you can present your extension.
+
+</details>
 <details>
   <summary><h1> Further Resources </h1></summary>
-</details>
+<h2 id="example_ext"> Example Extensions </h2>
+To get an idea of how an extension can be structured, you can check out the following example extensions:
+
+| Extension             | Description                                                                                                                                                         | Link                                                       |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
+| StringEx              | This extension is designed to present [STRING DB](https://string-db.org/) networks on the VRNetzer platform.                                                        | [Link](https://github.com/menchelab/StringEx)              |
+| ProteinStructureFetch | This extension allows for fetching and processing 3d protein structures from [AlphaFold DB](https://alphafold.ebi.ac.uk/) to explore them on the VRNetzer platform. | [Link](https://github.com/menchelab/ProteinStructureFetch) |
+
+---
 
 <h2 id="troubleshooting"> Troubleshooting </h2>
-...
+TODO: list common problems and solutions
+</details>

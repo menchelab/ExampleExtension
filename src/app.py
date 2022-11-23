@@ -3,7 +3,6 @@ import os
 import random
 
 import flask
-
 import GlobalData as GD
 import uploader
 import util
@@ -43,22 +42,22 @@ def hello():
 # Adds a tab to the main panel route to this is /example/main
 @blueprint.route("/main", methods=["GET"])
 def example_main():
-    return "Example Main Panel"
+    return flask.render_template("example_main.html")
 
 
-@blueprint.route("/upload", methods=["GET"])
+@blueprint.route("/nodepanel", methods=["GET"])
 def example_node_info():
-    return "Example Node Info Panel"
+    return "Node Info"
 
 
 @blueprint.route("/upload", methods=["GET"])
 def example_upload():
-    return "Example Upload Panel"
+    return "Upload"
 
 
 @blueprint.route("/preview", methods=["GET"])
 def example_preview():
-    return "Example Preview Panel"
+    return "Example Preview"
 
 
 @blueprint.route("/uploadfiles", methods=["POST"])
