@@ -38,7 +38,7 @@ If you would like to discuss anything about the VRNetzer, you can join our commu
 The VRNetzer 2.0 ...
 
 - Running on Flask 2.0
-- UI as html
+- UI HTML/CSS/JS
 
 ### Extension of VRNetzer Core
 
@@ -73,6 +73,12 @@ Subsequently, you can add your forked ExampleExtension as a submodule to your VR
     git submodule add https://github.com/<YourGitUsername>/ExampleExtension.git
 
 In this manner, you can easily change your extension while keeping it contained in the testing environment of the VRNetzer backend. Whenever you change something in your extension, you can easily commit your changes to your forked ExampleExtension repository.
+
+<ins>**Tip** </ins>
+
+If the directory of your submodule is for some reason empty you can use the following command to sync the submodules
+
+    git submodule sync
 
 ### Run the VRNetzer with your extension
 
@@ -178,7 +184,7 @@ The content of the tab needs to be contained in a `div` with the id `tab_to_add`
 </div>
 ```
 
-The flask server will search for a free tab on the main panel before the first request and add the content of you tab to the main panel. If you want to change the icon on the tab, you have to define an `image` tag with the id `tab_icon` in your tab template. The src of this image will contain the URL for the icon you want to use.
+On each request, the flask sever will add your tab to the main panel. If you want to change the icon on the tab, you have to define an `image` tag with the id `tab_icon` in your tab template. The src of this image will contain the URL for the icon you want to use.
 
 ```
 <img id="tab_img" src="{{ url_for('ExampleExtension.static', filename='img/example_icon.png') }}"
@@ -189,7 +195,7 @@ The flask server will change the icon accordingly. Furthermore, external links t
 
 All of this applies if you want to add a new tab to the uploader. You can utilize the `example_upload_tab.html` template contained in the ExampleExtension. HTML files to add have to be added to the `upload_tabs` list in the `app.py` file.
 
----
+If you want to add a new tab to the nodepanel or nodepanelppi, you can utilize the `example_nodepanel_tab.html` and `example_nodepanelppi_tab.html` template contained in the ExampleExtension. HTML files to add have to be added to the list `nodepanel_tabs` and `nodepanelppi_tabs`, respectively, in the `app.py` file.
 
 <h4 id="home_present"><b>5. Present your new routes at VRNetzer's Home</h4>
 

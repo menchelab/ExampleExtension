@@ -30,7 +30,10 @@ main_tabs = [
 upload_tabs = [
     "example_upload_tab.html"
 ]  # List of tab templates to be loaded in the upload panel
-
+nodepanel_tabs = [
+    "example_nodepanel_tab.html"
+]  # List of tab templates to be loaded in the node panel
+nodepanelppi_tabs = ["example_nodepanelppi_tab.html"]
 before_first_request = []  # List of functions to be executed before the first request
 
 # Define your first route
