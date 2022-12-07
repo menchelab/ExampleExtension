@@ -80,6 +80,10 @@ If the directory of your submodule is for some reason empty you can use the foll
 
     git submodule sync
 
+or use
+
+    git submodule update --init --recursive
+
 ### Run the VRNetzer with your extension
 
 The ExampleExtension repository gives you a basic idea of what is needed so that your extension can be loaded by the VRNetzer backend. To test your extension, you can simply run the VRNetzer backend running the appropriate script for your platform:
