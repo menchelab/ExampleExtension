@@ -167,7 +167,16 @@ To link to files in these directories in your HTML files, you should utilize fla
 
 **3. Add functions to be executed before the first request**
 
-If some code needs to be executed before the first request, you can define a list of functions called `before_first_request` in your `app.py`. For example, have to dynamically build your templates, you can make use of this functionality.
+If some function needs to be executed before the first request, you can decorate this function with the decorator `@blueprint.before_app_first_request` in your app.py.
+
+```
+@blueprint.before_app_first_request
+def extension_setup():
+    # Your code
+    pass
+```
+
+This tells the main app to execute this function just before the first request is made. This is useful if you want to initialize some variables or load some data before the first request is made.
 
 ---
 

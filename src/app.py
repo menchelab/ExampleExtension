@@ -34,7 +34,7 @@ nodepanel_tabs = [
     "example_nodepanel_tab.html"
 ]  # List of tab templates to be loaded in the node panel
 nodepanelppi_tabs = ["example_nodepanelppi_tab.html"]
-before_first_request = []  # List of functions to be executed before the first request
+
 
 # Define your first route
 @blueprint.route("/hello", methods=["GET"])
@@ -70,3 +70,10 @@ def example_upload_files():
         return "<a style='color:green;'>Success</a>", 200
     else:
         return "<a style='color:red;'>Error</a>", 500
+
+
+@blueprint.before_app_first_request
+def example_extension_setup():
+    # prepare some important variables
+    # do more important stuff
+    pass
