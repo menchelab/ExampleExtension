@@ -2,8 +2,7 @@
 
 This series teaches you the basic skills you need for developing an extension for the VRNetzer backend module.
 
-<details>
-  <summary><h1> Overview </h1></summary>
+<h1> Overview </h1>
 
 Here you will get an overview of the VRNetzer platform. You will learn what you can do with the VRNetzer platform and how to use it. Furthermore, you will learn about the essential technical aspects of the VRNetzer platform.
 
@@ -45,10 +44,7 @@ The VRNetzer 2.0 ...
 The Core module builds the basis of the VRNetzer. It comes with a basic set of features to
 visualize network data. We highly encourage you to extend the VRNetzer and share your results with the community. This way, you can help us to improve the VRNetzer and make it more useful for everyone.
 
-</details>
-
-<details>
-  <summary><h1> Start creating your first extension</h1></summary>
+<h1> Start creating your first extension</h1>
 
 ### Fork the VRNetzer backend repository
 
@@ -216,13 +212,13 @@ If you want your route to be presented in one of the categories shown on http://
 
 The navigation bar is only shown outside of the VR. If you would like to have your route to be presented here, the same rules apply as for the home page [(see above)](#home_present).
 
+<!--
 ## Deployment
 
 ## TODO: Describe the deployment process on a platform where you can present your extension.
+-->
 
-</details>
-<details>
-  <summary><h1> Further Resources </h1></summary>
+<h1> Further Resources </h1>
 <h2 id="example_ext"> Example Extensions </h2>
 To get an idea of how an extension can be structured, you can check out the following example extensions:
 
@@ -233,6 +229,7 @@ To get an idea of how an extension can be structured, you can check out the foll
 
 ---
 
+<!--
 <h2 id="troubleshooting"> Troubleshooting </h2>
 TODO: list common problems and solutions
-</details>
+-->
