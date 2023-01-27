@@ -211,15 +211,34 @@ If you want to add a new tab to the nodepanel or nodepanelppi, you can utilize t
 If you want your route to be presented in one of the categories shown on http://127.0.0.1:6000/home (Windows/Linux) / http://127.0.0.1:3000/home (MacOS), your route has to contain one of the following keywords:
 |Keyword|Category|Example|
 |:-|:-|:-|
-|`home`|Home|`@blueprint.route("/home")`|
 |`main`|Main (Panels)|`@blueprint.route("/main")`|
 |`nodepanel`|Node Info|`@blueprint.route("/nodepanel")`|
 |`upload` but not `upload` and `files`|Uploader|`@blueprint.route("/upload")`|
 |`preview`|Previews|`@blueprint.route("/preview")`|
 
-**6. Present your new routes on the navigation bar**
+**6. Perform socketio.emit from extension**
 
-The navigation bar is only shown outside of the VR. If you would like to have your route to be presented here, the same rules apply as for the home page [(see above)](#home_present).
+To send a `socketio.emit` from your extension, you can use the following code:
+
+```
+flask.current_app.socketio.emit(
+    "ex",
+    {"id": "someId", "opt": "someOption", "fn": "someFunction"},
+)
+```
+
+You should provide the correct namespace for either your own extension or one of the existing namespaces, for example:
+
+```
+namespace = "/chat"
+room = flask.session.get("room")
+flask.current_app.socketio.emit(
+    "ex",
+    {"id": "someId", "opt": "someOption", "fn": "someFunction"},
+    room = room,
+    namespace = namespace,
+)
+```
 
 <!--
 ## Deployment
@@ -242,3 +261,7 @@ To get an idea of how an extension can be structured, you can check out the foll
 <h2 id="troubleshooting"> Troubleshooting </h2>
 TODO: list common problems and solutions
 -->
+
+```
+
+```

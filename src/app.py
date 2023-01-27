@@ -77,3 +77,15 @@ def example_extension_setup():
     # prepare some important variables
     # do more important stuff
     pass
+
+@blueprint.route("/sendSocketIO", methods=["GET"])
+def example_send_socketio():
+    namespace = "/chat"
+    room = flask.session.get("room")
+    flask.current_app.socketio.emit(
+        "ex",
+        {"id": "someId", "opt": "someOption", "fn": "someFunction"},
+        namespace=namespace,
+        room=room,
+    )
+    return "Sent"
