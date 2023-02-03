@@ -262,7 +262,7 @@ def example_receive_socketio(message):
 You can also provide a different namespace for example `/chat`:
 
 ```
-@blueprint.on("example")
+@blueprint.on("example",namespace="/chat")
 def example_receive_socketio_in_main(message):
     print("Received example form client:")
     print(message)
