@@ -123,7 +123,7 @@ The app.py file is the entry point of your extension. It has to be included in a
 
   - This string defines the prefix each flask route of your extension will have. For example, if you set the url_prefix to 'example', the route '/test' will be accessible via 'http://localhost:5000/example/test'.
 
-- A flask blueprint called `blueprint`.
+- A flask blueprint or an IOBlueprint called `blueprint`.
 
   - this attribute is defined by the following line of code:
 
@@ -134,7 +134,17 @@ The app.py file is the entry point of your extension. It has to be included in a
       url_prefix=url_prefix)
   ```
 
-  The blueprint will be registered by the main VRNetzer backend `app.py` and is used to define the routes your extension adds. For further information on flask blueprints, you can check the [flask documentation](https://flask.palletsprojects.com/en/2.0.x/blueprints/).
+  or
+
+  ```
+  from io_blueprint import IOBlueprint
+  blueprint = IOBlueprint(
+      extensions_name,
+      __name__,
+      url_prefix=url_prefix)
+  ```
+
+  The blueprint will be registered by the main VRNetzer backend `app.py` and is used to define the routes your extension adds. For further information on flask blueprints, you can check the [flask documentation](https://flask.palletsprojects.com/en/2.0.x/blueprints/). The IOBlueprint is a custom blueprint class that allows extensions to send and receive socket io messages.
 
 ---
 
@@ -148,7 +158,7 @@ templates =  os.path.abspath("./extensions/<NameOfYourExtension>/templates")
 
 static = os.path.abspath("./extensions/<NameOfYourExtension>/static")
 
-blueprint = flask.Blueprint(
+blueprint = flask.Blueprint( # Or IOBlueprint
     <NameOfYourExtension>,
     __name__,
     url_prefix=url_prefix,
@@ -218,27 +228,47 @@ If you want your route to be presented in one of the categories shown on http://
 
 **6. Perform socketio.emit from extension**
 
-To send a `socketio.emit` from your extension, you can use the following code:
+To send a `socketio.emit` from your extension, your blueprint has to be an IOBlueprint. Then you can use the following code to emit a socketIO message in your namespace:
 
 ```
-flask.current_app.socketio.emit(
+blueprint.emit(
     "ex",
     {"id": "someId", "opt": "someOption", "fn": "someFunction"},
 )
 ```
 
-You should provide the correct namespace for either your own extension or one of the existing namespaces, for example:
+If you want to emit a message to namespace, your can use the namespace argument:
 
 ```
-namespace = "/chat"
+namespace="/chat"
 room = flask.session.get("room")
-flask.current_app.socketio.emit(
+blueprint.emit(
     "ex",
     {"id": "someId", "opt": "someOption", "fn": "someFunction"},
     room = room,
     namespace = namespace,
 )
 ```
+
+**6. Receive a socket io message for your extension namespace**
+
+```
+@blueprint.on("example")
+def example_receive_socketio(message):
+    print("Received example form client:")
+    print(message)
+```
+
+You can also provide a different namespace for example `/chat`:
+
+```
+@blueprint.on("example")
+def example_receive_socketio_in_main(message):
+    print("Received example form client:")
+    print(message)
+```
+
+This can be useful if your extension adds new UI elements to the main panel and you want to send a message to your extension.
 
 <!--
 ## Deployment

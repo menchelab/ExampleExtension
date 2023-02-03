@@ -6,7 +6,7 @@ import flask
 import GlobalData as GD
 import uploader
 import util
-
+from io_blueprint import IOBlueprint
 # Prefix for the extension, as well as the names space of the extension
 url_prefix = "/ExampleExtension"  # MANDATORY
 extensions_name = "ExampleExtension"
@@ -16,7 +16,7 @@ templates = os.path.abspath("./extensions/ExampleExtension/templates")
 static = os.path.abspath("./extensions/ExampleExtension/static")
 
 # Create a blueprint for the extension this will be loaded by the main app
-blueprint = flask.Blueprint(
+blueprint = IOBlueprint(
     extensions_name,
     __name__,
     url_prefix=url_prefix,
@@ -78,14 +78,30 @@ def example_extension_setup():
     # do more important stuff
     pass
 
-@blueprint.route("/sendSocketIO", methods=["GET"])
-def example_send_socketio():
+@blueprint.route("/emit", methods=["GET"])
+def example_emit_socketio_to_main():
+    """This will send a socketio message to the main panel. Check the console of the main panel to see the message."""
     namespace = "/chat"
-    room = flask.session.get("room")
-    flask.current_app.socketio.emit(
-        "ex",
-        {"id": "someId", "opt": "someOption", "fn": "someFunction"},
-        namespace=namespace,
-        room=room,
-    )
-    return "Sent"
+    room = 1
+    blueprint.emit(
+                "ex",
+                {"id": "someId", "opt": "someOption", "fn": "SomeFunction"},
+                namespace=namespace,
+                room=room,
+            )
+    return "sent"
+
+@blueprint.route("/send", methods=["GET"])
+def example_send_socketio():
+    """Webpage with a button, when pressed a socketio message to this extension is send."""
+    return flask.render_template("example_send_socketio.html")
+
+@blueprint.on("example")
+def example_receive_socketio(message):
+    print("Received example form client:")
+    print(message)
+
+@blueprint.on("example",namespace="/chat")
+def example_receive_socketio_in_main(message):
+    print("Received example form client:")
+    print(message)
