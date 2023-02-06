@@ -78,30 +78,36 @@ def example_extension_setup():
     # do more important stuff
     pass
 
+
 @blueprint.route("/emit", methods=["GET"])
 def example_emit_socketio_to_main():
     """This will send a socketio message to the main panel. Check the console of the main panel to see the message."""
     namespace = "/chat"
     room = 1
     blueprint.emit(
-                "ex",
-                {"id": "someId", "opt": "someOption", "fn": "SomeFunction"},
-                namespace=namespace,
-                room=room,
-            )
+        "ex",
+        {"id": "someId", "opt": "someOption", "fn": "SomeFunction"},
+        namespace=namespace,
+        room=room,
+    )
     return "sent"
+
 
 @blueprint.route("/send", methods=["GET"])
 def example_send_socketio():
     """Webpage with a button, when pressed a socketio message to this extension is send."""
     return flask.render_template("example_send_socketio.html")
 
+
 @blueprint.on("example")
 def example_receive_socketio(message):
     print("Received example form client:")
     print(message)
 
-@blueprint.on("example",namespace="/chat")
+
+@blueprint.on("example", namespace="/chat")
 def example_receive_socketio_in_main(message):
     print("Received example form client:")
     print(message)
+
+
