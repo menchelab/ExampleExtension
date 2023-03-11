@@ -7,6 +7,7 @@ import GlobalData as GD
 import uploader
 import util
 from io_blueprint import IOBlueprint
+
 # Prefix for the extension, as well as the names space of the extension
 url_prefix = "/ExampleExtension"  # MANDATORY
 extensions_name = "ExampleExtension"
@@ -109,5 +110,3 @@ def example_receive_socketio(message):
 def example_receive_socketio_in_main(message):
     print("Received example form client:")
     print(message)
-
-
