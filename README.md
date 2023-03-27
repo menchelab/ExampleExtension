@@ -8,9 +8,9 @@ Here you will get an overview of the VRNetzer platform. You will learn what you 
 
 ### What is the VRnetzer?
 
-The VRNetzer is a virtual reality platform used to explore and analyze network data.
+The [VRNetzer](https://github.com/menchelab/VRNetzer) is a virtual reality platform used to explore and analyze network data.
 
-## Useful Presentations and Tutorials
+<!-- ## Useful Presentations and Tutorials
 
 In the following you can find some resources that might be useful for you:
 | Resource | Description | Reference |
@@ -19,9 +19,9 @@ In the following you can find some resources that might be useful for you:
 | SOME INTRODUCTION | SOME DESCRIPTION | SOME REFERENCE |
 | SOME INTRODUCTION | SOME DESCRIPTION | SOME REFERENCE |
 | SOME INTRODUCTION | SOME DESCRIPTION | SOME REFERENCE |
-| SOME INTRODUCTION | SOME DESCRIPTION | SOME REFERENCE |
+| SOME INTRODUCTION | SOME DESCRIPTION | SOME REFERENCE | -->
 
-### Get in touch
+<!-- ### Get in touch
 
 If you would like to discuss anything about the VRNetzer, you can join our community, contact us directly via email or visit our website.
 | Platform | Description | Reference |
@@ -30,14 +30,11 @@ If you would like to discuss anything about the VRNetzer, you can join our commu
 |(EMAIL/WEBSITE/SOCIALMEDIA)| SOME DESCRIPTION | SOME REFERENCE |
 |(EMAIL/WEBSITE/SOCIALMEDIA)| SOME DESCRIPTION | SOME REFERENCE |
 |(EMAIL/WEBSITE/SOCIALMEDIA)| SOME DESCRIPTION | SOME REFERENCE |
-|(EMAIL/WEBSITE/SOCIALMEDIA)| SOME DESCRIPTION | SOME REFERENCE |
+|(EMAIL/WEBSITE/SOCIALMEDIA)| SOME DESCRIPTION | SOME REFERENCE | -->
 
 ### The technology behind the VRNetzer
 
-The VRNetzer 2.0 ...
-
-- Running on Flask 2.0
-- UI HTML/CSS/JS
+The VRNetzer 2.0 runs on Flask 2.0 and its UI consists of webpages (HTML/CSS/JS)
 
 ### Extension of VRNetzer Core
 
@@ -68,17 +65,9 @@ Subsequently, you can add your forked ExampleExtension as a submodule to your VR
 
     git submodule add https://github.com/<YourGitUsername>/ExampleExtension.git
 
-In this manner, you can easily change your extension while keeping it contained in the testing environment of the VRNetzer backend. Whenever you change something in your extension, you can easily commit your changes to your forked ExampleExtension repository.
-
-<ins>**Tip** </ins>
-
-If the directory of your submodule is for some reason empty you can use the following command to sync the submodules
-
-    git submodule sync
-
-or use
-
     git submodule update --init --recursive
+
+In this manner, you can easily change your extension while keeping it contained in the testing environment of the VRNetzer backend. Whenever you change something in your extension, you can easily commit your changes to your forked ExampleExtension repository.
 
 ### Run the VRNetzer with your extension
 
