@@ -1,0 +1,27 @@
+<link rel="stylesheet" href="{{ url_for('ExampleExtension.static', filename='css/ExampleStyle.css') }}">
+
+<script src="{{ url_for('ExampleExtension.static', filename='js/ExampleScript.js') }}"></script>
+<script src="{{ url_for('ExampleExtension.static', filename='js/ExampleSocket.js') }}"></script>
+
+<div class="gradientBox">
+    <div class='swagBox' style="width:420px; background-color: rgba(16, 3, 0, 0.3);">
+        <h5 id="exampleExMainModule2"
+            style="  float:left; font-size: 25px;  color: rgb(102, 102, 102); margin-top:5px; margin-bottom:5px;">
+            Example Extension 2
+        </h5>
+        <br>
+        <div class="gradient"></div>
+
+        <pre id="exampleExMainModule2Text"
+            style="width: 400px; word-wrap: break-word; max-height: 300px; overflow-y:scroll;overflow-x:hidden; word-break: break-word; white-space: pre-wrap;">
+        </pre>
+    </div>
+</div>
+<script>
+    exampleExtensionSocket.emit("status", { usr: uid })
+    exampleExtensionSocket.on("status", function(data) {
+        if (data.usr == uid) {
+            document.getElementById("exampleExMainModule2Text").innerHTML = data.text
+        }
+    })
+</script>

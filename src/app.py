@@ -3,6 +3,8 @@ import os
 import random
 
 import flask
+from lorem.text import TextLorem
+
 import GlobalData as GD
 import uploader
 import util
@@ -25,16 +27,23 @@ blueprint = IOBlueprint(
     static_folder=static,  # defaults to static of main app.py
 )  # MANDATORY
 
-main_tabs = [
-    "example_main_tab.html"
-]  # List of tab templates to be loaded in the main panel
+column_1 = [
+    "example_main_tab_1.html"
+]  # List of tab templates to be loaded in the first column of the main panel
+column_2 = [
+    "example_main_tab_2.html"
+]  # List of tab templates to be loaded in the second column of the main panel
+column_3 = [
+    "example_main_tab_3.html"
+]  # List of tab templates to be loaded in the third column of the main panel
+
+column_4 = [
+    "example_main_tab_4.html"
+]  # List of tab templates to be loaded in the fourth column of the main panel
+
 upload_tabs = [
     "example_upload_tab.html"
 ]  # List of tab templates to be loaded in the upload panel
-nodepanel_tabs = [
-    "example_nodepanel_tab.html"
-]  # List of tab templates to be loaded in the node panel
-nodepanelppi_tabs = ["example_nodepanelppi_tab.html"]
 
 
 # Define your first route
@@ -110,3 +119,14 @@ def example_receive_socketio(message):
 def example_receive_socketio_in_main(message):
     print("Received example form client:")
     print(message)
+
+
+@blueprint.on("status")
+def example_send_status(message):
+    text = "Hello World!\n\n"
+    lorem = TextLorem()
+    for _ in range(0, 2):
+        text += lorem.sentence() + "\n"
+    message["text"] = text
+    print(message)
+    blueprint.emit("status", message)
