@@ -3,6 +3,7 @@ import os
 import random
 
 import flask
+
 import GlobalData as GD
 import uploader
 import util
@@ -110,3 +111,37 @@ def example_receive_socketio(message):
 def example_receive_socketio_in_main(message):
     print("Received example form client:")
     print(message)
+
+
+@GD.socket_execute
+def example_function_on_socket_execute(message):
+    """The @GD.socket_execute decorator can be used to add a function to the
+    backend routine which is executed whenever a socket 'ex' event is triggered.
+    This is useful to update certain things at the backend whenever the user
+    interacts with the user interface."""
+    print(
+        f"This is the ExampleExtension reacting to a 'ex' socketIO event. Here is the respective message: {message}"
+    )
+
+
+@GD.socket_join
+def example_function_on_socket_join(message):
+    """The @GD.socket_join decorator can be used to add a function to the
+    backend routine which is executed whenever a socket 'join' event is
+    triggered. This is useful to update certain things at the backend whenever
+    a user joins."""
+    print(
+        f"This is the ExampleExtension reacting to a 'join' socketIO event. Here is the respective message: {message}"
+    )
+
+
+@GD.socket_left
+def example_function_on_socket_left(message):
+    """The @GD.socket_left decorator can be used to add a function to the
+    backend routine which is executed whenever a socket 'left' event is
+    triggered. This is useful to update certain things at the backend whenever
+    a user leaves."""
+    print(
+        f"""This is the ExampleExtension reacting to a 'left' socketIO event.
+        Here is the respective message:\n{message}"""
+    )
