@@ -1,14 +1,14 @@
-# VRNetzer backend example extension
+# DataDiVR backend example extension
 
-This series teaches you the basic skills you need for developing an extension for the VRNetzer backend module.
+This series teaches you the basic skills you need for developing an extension for the DataDiVR Web application.
 
 <h1> Overview </h1>
 
-Here you will get an overview of the VRNetzer platform. You will learn what you can do with the VRNetzer platform and how to use it. Furthermore, you will learn about the essential technical aspects of the VRNetzer platform.
+Here you will get an overview of the DataDiVR platform. You will learn what you can do with the DatDiVR platform and how to use it. Furthermore, you will learn about the essential technical aspects of the DataDiVR platform.
 
-### What is the VRnetzer?
+### What is the DataDiVR?
 
-The [VRNetzer](https://github.com/menchelab/VRNetzer) is a virtual reality platform used to explore and analyze network data.
+The [DataDiVR](https://github.com/menchelab/DataDiVR_WebApp) is a virtual reality platform used to explore and analyze network data.
 
 <!-- ## Useful Presentations and Tutorials
 
@@ -32,52 +32,52 @@ If you would like to discuss anything about the VRNetzer, you can join our commu
 |(EMAIL/WEBSITE/SOCIALMEDIA)| SOME DESCRIPTION | SOME REFERENCE |
 |(EMAIL/WEBSITE/SOCIALMEDIA)| SOME DESCRIPTION | SOME REFERENCE | -->
 
-### The technology behind the VRNetzer
+### The technology behind the DataDiVR
 
-The VRNetzer 2.0 runs on Flask 2.0 and its UI consists of webpages (HTML/CSS/JS)
+The DataDiVR runs on Flask 2.0 and its UI consists of webpages (HTML/CSS/JS)
 
-### Extension of VRNetzer Core
+### Extension of DataDiVR Core
 
-The Core module builds the basis of the VRNetzer. It comes with a basic set of features to
-visualize network data. We highly encourage you to extend the VRNetzer and share your results with the community. This way, you can help us to improve the VRNetzer and make it more useful for everyone.
+The Core module builds the basis of the DataDiVR. It comes with a basic set of features to
+visualize network data. We highly encourage you to extend the DataDiVR and share your results with the community.
+This way, you can help us to improve the DataDiVR and make it more useful for everyone.
 
 <h1> Start creating your first extension</h1>
 
-### Fork the VRNetzer backend repository
+### Fork the DataDiVR backend repository
 
-To create a testing environment for your extension you should start by creating a fork of the [VRNetzer backend repository](https://github.com/menchelab/VRNetzer_Backend). This way, you can include your extension in the VRNetzer backend and test it. Furthermore, you can easily keep track of the changes we make to the VRNetzer backend and update your extension accordingly if needed.
+To create a testing environment for your extension you should start by creating a fork of the [DataDiVR WebApp repository](https://github.com/menchelab/DataDiVR_WebApp). This way, you can include your extension in the DataDiVR backend and test it. Furthermore, you can easily keep track of the changes we make to the DataDiVR backend and update your extension accordingly if needed.
 
 ### Fork the ExampleExtension repository
 
-To easily share your extension with the community, we recommend creating a fork of the [ExampleExtension repository](https://github.com/menchelab/ExampleExtension). This way you can easily update, and change your extension, as well as keep track of issues. Furthermore, everyone who would like to use it can drop it into their VRNetzer backend without fetching the full backend module.
+To easily share your extension with the community, we recommend creating a fork of the [ExampleExtension repository](https://github.com/menchelab/ExampleExtension). This way you can easily update, and change your extension, as well as keep track of issues. Furthermore, everyone who would like to use it can drop it into their DataDiVR backend without fetching the full backend module.
 
-### Add your extension to the VRNetzer backend
+### Add your extension to the DataDiVR backend
 
-Now that you forked both the VRNetzer backend as well as the ExampleExpansion, you can start by cloning your forked repository of the VRNetzer backend to your desired location.
+Now that you forked both the DataDiVR backend as well as the ExampleExpansion, you can start by cloning your forked repository of the DataDiVR backend to your desired location.
 
-    git clone https://github.com/<YourGitUsername>/VRNetzer_Backend
+    git clone https://github.com/<YourGitUsername>/DataDiVR_WebApp
 
-Subsequently, you can add your forked ExampleExtension as a submodule to your VRNetzer backend.:
+Subsequently, you can clone your forked ExampleExtension to your DataDiVR backend:
 
-    cd VRNetzer_Backend
+    cd DataDiVR_WebApp
 
     cd extensions
 
-    git submodule add https://github.com/<YourGitUsername>/ExampleExtension.git
+    git clone add https://github.com/<YourGitUsername>/ExampleExtension.git
 
-    git submodule update --init --recursive
+In this manner, you can easily change your extension while keeping it contained in the testing environment of the DataDiVR backend. Whenever you change something in your extension, you can easily commit your changes to your forked ExampleExtension repository.
 
-In this manner, you can easily change your extension while keeping it contained in the testing environment of the VRNetzer backend. Whenever you change something in your extension, you can easily commit your changes to your forked ExampleExtension repository.
 
-### Run the VRNetzer with your extension
+### Run the DataDiVR with your extension
 
-The ExampleExtension repository gives you a basic idea of what is needed so that your extension can be loaded by the VRNetzer backend. To test your extension, you can simply run the VRNetzer backend running the appropriate script for your platform:
+The ExampleExtension repository gives you a basic idea of what is needed so that your extension can be loaded by the DataDiVR backend. To test your extension, you can simply run the DataDiVR backend running the appropriate script for your platform:
 
 - windows: run `buildandRUN.ps1` in console
 - linux: run `linux_buildandrun.sh` in console
 - mac: run `mac_buildandrun.sh` in console
 
-This script will create a virtual environment, install all necessary dependencies and run the VRNetzer backend. If everything worked out, you should see the following message in green in your console:
+This script will create a virtual environment, install all necessary dependencies and run the DataDiVR backend. If everything worked out, you should see the following message in green in your console:
 
 > <span style="color:green"> Loaded extension: ExampleExtension<br>
 > Finished loading extensions, server is running...</span>
@@ -86,7 +86,7 @@ If you see a yellow warning message similar to this:
 
 > <span style="color:yellow">
 > Traceback (most recent call last):<br>
-> File "/VRNetzer_Backend/load_extensions.py", line 17, in load<br>
+> File "/DataDiVR/load_extensions.py", line 17, in load<br>
 > &nbsp;&nbsp;module.blueprint, url_prefix=module.url_prefix<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;AttributeError: module 'extensions.documentation.src.app' has no attribute 'blueprint'<br><br>
 > Make sure you have an app.py file in the '/src/' folder of your extension.
@@ -102,7 +102,7 @@ something seems to be wrong with your extension and it will not be loaded by the
 
 ### Components of an extension
 
-The ExampleExtension repository gives you a basic idea of what is needed so that your extension can be loaded by the VRNetzer backend. In the following, we will give you a more detailed overview of the components of an extension.
+The ExampleExtension repository gives you a basic idea of what is needed so that your extension can be loaded by the DataDiVR backend. In the following, we will give you a more detailed overview of the components of an extension.
 
 **1. `app.py` file in an `src` directory**
 
@@ -133,7 +133,7 @@ The app.py file is the entry point of your extension. It has to be included in a
       url_prefix=url_prefix)
   ```
 
-  The blueprint will be registered by the main VRNetzer backend `app.py` and is used to define the routes your extension adds. For further information on flask blueprints, you can check the [flask documentation](https://flask.palletsprojects.com/en/2.0.x/blueprints/). The IOBlueprint is a custom blueprint class that allows extensions to send and receive socket io messages.
+  The blueprint will be registered by the main DataDiVR backend `app.py` and is used to define the routes your extension adds. For further information on flask blueprints, you can check the [flask documentation](https://flask.palletsprojects.com/en/2.0.x/blueprints/). The IOBlueprint is a custom blueprint class that allows extensions to send and receive socket io messages.
 
 ---
 
@@ -181,7 +181,7 @@ This tells the main app to execute this function just before the first request i
 
 **4. Add tabs to the Main Panel and add a new Uploader**
 
-If you want to add a new tab to the VRNetzer Main Panel, you can utilize the `example_main_tab.html` template contained in the ExampleExtension. Each HTML that should be added as a tab to the main panel, has to be added to the `main_tabs`list in the `app.py` file. The flask server will automatically add the tabs to the main panel.
+If you want to add a new tab to the DataDiVR Main Panel, you can utilize the `example_main_tab.html` template contained in the ExampleExtension. Each HTML that should be added as a tab to the main panel, has to be added to the `main_tabs`list in the `app.py` file. The flask server will automatically add the tabs to the main panel.
 The content of the tab needs to be contained in a `div` with the id `tab_to_add`:
 
 ```
@@ -192,7 +192,7 @@ The content of the tab needs to be contained in a `div` with the id `tab_to_add`
 </div>
 ```
 
-On each request, the flask sever will add your tab to the main panel. If you want to change the icon on the tab, you have to define an `image` tag with the id `tab_icon` in your tab template. The src of this image will contain the URL for the icon you want to use.
+On each request, the flask server will add your tab to the main panel. If you want to change the icon on the tab, you have to define an `image` tag with the id `tab_icon` in your tab template. The src of this image will contain the URL for the icon you want to use.
 
 ```
 <img id="tab_img" src="{{ url_for('ExampleExtension.static', filename='img/example_icon.png') }}"
@@ -205,7 +205,7 @@ All of this applies if you want to add a new tab to the uploader. You can utiliz
 
 If you want to add a new tab to the nodepanel or nodepanelppi, you can utilize the `example_nodepanel_tab.html` and `example_nodepanelppi_tab.html` template contained in the ExampleExtension. HTML files to add have to be added to the list `nodepanel_tabs` and `nodepanelppi_tabs`, respectively, in the `app.py` file.
 
-<h4 id="home_present"><b>5. Present your new routes at VRNetzer's Home</h4>
+<h4 id="home_present"><b>5. Present your new routes at DataDiVR's Home</h4>
 
 If you want your route to be presented in one of the categories shown on http://127.0.0.1:6000/home (Windows/Linux) / http://127.0.0.1:3000/home (MacOS), your route has to contain one of the following keywords:
 |Keyword|Category|Example|
@@ -226,7 +226,7 @@ blueprint.emit(
 )
 ```
 
-If you want to emit a message to namespace, your can use the namespace argument:
+If you want to emit a message to namespace, you can use the namespace argument:
 
 ```
 namespace="/chat"
@@ -271,9 +271,7 @@ To get an idea of how an extension can be structured, you can check out the foll
 
 | Extension             | Description                                                                                                                                                         | Link                                                       |
 | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
-| StringEx              | This extension is designed to present [STRING DB](https://string-db.org/) networks on the VRNetzer platform.                                                        | [Link](https://github.com/menchelab/StringEx)              |
-| ProteinStructureFetch | This extension allows for fetching and processing 3d protein structures from [AlphaFold DB](https://alphafold.ebi.ac.uk/) to explore them on the VRNetzer platform. | [Link](https://github.com/menchelab/ProteinStructureFetch) |
-
+| CyEx              | This extension is designed to import networks from Cytoscape to the DataDiVR platform.                                                        | [Link](https://github.com/ObT1337/CyEx)              |
 ---
 
 <!--
