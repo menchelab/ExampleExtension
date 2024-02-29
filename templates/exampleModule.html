@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="{{ url_for('ExampleExtension.static', filename='css/ExampleStyle.css') }}">
+
+    <script src="{{ url_for('ExampleExtension.static', filename='js/exampleScript.js') }}"></script>
+</head>
+
+<body>
+    <!-- This Module will be added -->
+    <mc-module id="module-example_ex" name="ExampleEx">
+        <p id="example_HelloWorld" style="font-size:1px"> Hello World</p>
+        <p id="example_HelloWorld_textSize" style="font-size:20px"> 20</p>
+        <mc-slider id="slider-exampleHelloWorldSize" name="TEXT SIZE" class="GD" type="slider" min="1" max="50" step="1"
+            value="20"></mc-slider>
+    </mc-module>
+</body>
+
+</html>

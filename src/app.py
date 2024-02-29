@@ -3,7 +3,6 @@ import os
 import random
 
 import flask
-
 import GlobalData as GD
 import uploader
 import util
@@ -26,16 +25,12 @@ blueprint = IOBlueprint(
     static_folder=static,  # defaults to static of main app.py
 )  # MANDATORY
 
-main_tabs = [
-    "example_main_tab.html"
-]  # List of tab templates to be loaded in the main panel
-upload_tabs = [
-    "example_upload_tab.html"
-]  # List of tab templates to be loaded in the upload panel
-nodepanel_tabs = [
-    "example_nodepanel_tab.html"
-]  # List of tab templates to be loaded in the node panel
-nodepanelppi_tabs = ["example_nodepanelppi_tab.html"]
+column_1 = [
+    "exampleModule.html"
+]  # List of all modules added to the first column of the main panel
+column_2 = []  # List of all modules added to the second column of the main panel
+column_3 = []  # List of all modules added to the third column of the main panel
+column_4 = []  # List of all modules added to the fourth column of the main panel
 
 
 # Define your first route
@@ -118,10 +113,18 @@ def example_function_on_socket_execute(message):
     """The @GD.socket_execute decorator can be used to add a function to the
     backend routine which is executed whenever a socket 'ex' event is triggered.
     This is useful to update certain things at the backend whenever the user
-    interacts with the user interface."""
-    print(
-        f"This is the ExampleExtension reacting to a 'ex' socketIO event. Here is the respective message: {message}"
-    )
+    interacts with the user interface.
+
+    For example, this function is connected with the example_module.html which
+    adds a slider to the main panel which changes the size of a text within the
+    module.
+    The emitted message is received by a socketIO connection established in the exampleScript.js file
+    """
+    if message["id"] == "slider-exampleHelloWorldSize":
+        blueprint.emit(
+            "textSize",
+            {"id": message["id"], "val": message["val"], "fn": message["fn"]},
+        )
 
 
 @GD.socket_join
